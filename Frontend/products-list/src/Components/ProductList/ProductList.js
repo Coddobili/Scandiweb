@@ -1,5 +1,6 @@
 import React from "react";
 import {useEffect, useState} from "react";
+import { Link } from "react-router-dom";
 import axios from 'axios';
 
 function ProductList() {
@@ -7,23 +8,28 @@ function ProductList() {
 
     useEffect(() => {
         axios.get('http://localhost:8080/get.php')
-        .then(function (response) {
+        .then((response) => {
             setProducts(response.data);
+        }).catch((error) => {
+            console.log(error);
         });
+
+        document.title = 'Product List';
     }, []);
 
     const handleMassDelete = () => {
         let checkboxes = document.getElementsByClassName('delete-checkbox');
-        alert(checkboxes.length)
         checkboxes = Array.from(checkboxes).filter(checkbox => checkbox.checked)
         checkboxes.forEach((e, index, array) => {
             array[index] = e.id;
         });
 
         axios.post('http://localhost:8080/massdelete.php', checkboxes)
-            .then(function (response) {
+            .then(() => {
                 window.location.reload(false);
-            });
+            }).catch((error) => {
+                console.log(error);
+            });;
     }
 
     return (
@@ -31,7 +37,7 @@ function ProductList() {
         <header>
             <h1>Product List</h1>
             <div>
-                <button type={'button'} >ADD</button>
+                <Link to="/add-product" >ADD</Link>
                 <button type={'button'} id={'delete-product-btn'} onClick={handleMassDelete}>MASS DELETE</button>
             </div>
         </header>

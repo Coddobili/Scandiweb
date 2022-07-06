@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
-import ProductList from "./Components/ProductList";
+import ProductList from "./Components/ProductList/ProductList";
+import AddProduct from "./Components/AddProduct/AddProduct";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -8,7 +9,7 @@ function App() {
     <Router>
           <Routes>
             <Route path="/" element={<ProductList />} />
-
+            <Route path="/add-product" element={<AddProduct />} />
           </Routes>
       </Router>
     );

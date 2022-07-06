@@ -5,37 +5,41 @@
   box-sizing: border-box;
 }
 
+/* for App Component */
 html, body {
   height: 100%;
   width: 100%;
 }
 
 hr {
-  height: 3px;
+  height: 4px;
+
   background-color: black;
 
-  border: none;
   border-bottom-left-radius: 5px;
   border-top-right-radius: 5px;
 
-  width: 97vw;
+  margin: 10px 30px;
 }
 
+/* for Header component */
 header {
-  height: 10vh;
+  height: 7vh;
 
   display: flex;
   justify-content: space-between;
 }
 
-#heading {
-  padding-top: calc(45px - 0.67em);
-  padding-left: calc(55px - 0.67em);
+header h1, div{
+  margin-top: 15px;
 }
 
-#buttons {
-  padding-top: 40px;
-  padding-right: 45px;
+header h1 {
+  margin-left: 40px;
+}
+
+header div {
+  padding-right: 40px;
 }
 
 button {
@@ -54,19 +58,19 @@ button:active {
   box-shadow: 3px 3px 1px black;
   transform: translate3d(1px, 1px, 1px);
 }
-
-#add:hover {
-  background-color: yellowgreen;
-}
-
-#mass-delete {
+#delete-product-btn {
   margin-left: 10px;
 }
 
-#mass-delete:hover {
+#add-product-btn:hover {
+  background-color: yellowgreen;
+}
+
+#delete-product-btn:hover {
   background-color: indianred;
 }
 
+/* for Main component */
 main {
   height: calc(80vh - 44px);
 
@@ -75,8 +79,19 @@ main {
  
 }
 
-main div  input {
-  align-items: flex-start;
+#product {
+  height: 180px;
+  width: 300px;
+  border: 1px solid black;
+  margin: 20px;
+}
+
+.delete-checkbox {
+  margin: 10px;
+}
+
+main div:first-child  input {
+  margin: 10px;
 }
 
 footer {

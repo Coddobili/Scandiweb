@@ -1,20 +1,12 @@
 import axios from "axios";
 import {useState, useEffect} from "react"; 
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function AddProduct() {
+    const nav = useNavigate();
     const [type, setType] = useState('Switcher');
 
-    const [details, setDetails] = useState({
-        sku: '',
-        name: '',
-        price: '',
-        size: '',
-        weight: '',
-        height: '',
-        width: '',
-        length: ''
-    });
+    const [details, setDetails] = useState({});
 
     const handleInputChange = (e) => {
         setDetails({...details, [e.target.id]: e.target.value})
@@ -28,12 +20,22 @@ function AddProduct() {
         e.preventDefault();
         if (type !== 'Switcher') {
             axios.post(`http://localhost:8080/add${type.toLowerCase()}.php`, details);
-            alert(JSON.stringify(details));
+            nav('/');
         }
     }
     
     useEffect(() => {
         document.title = 'Product Add';
+        setDetails({
+            sku: '',
+            name: '',
+            price: '',
+            size: '',
+            weight: '',
+            height: '',
+            width: '',
+            length: ''
+        });
     }, []);
 
     const [switcher] = useState({

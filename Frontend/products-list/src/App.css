@@ -56,22 +56,6 @@ button:active, a:active {
   transform: translate3d(1px, 1px, 1px);
 }
 
-#delete-product-btn {
-  margin-left: 10px;
-}
-
-a {
-  background-color: white;
-}
-
-a:hover {
-  background-color: yellowgreen;
-}
-
-#delete-product-btn:hover {
-  background-color: indianred;
-}
-
 /* for Main component */
 main {
   height: 80vh;

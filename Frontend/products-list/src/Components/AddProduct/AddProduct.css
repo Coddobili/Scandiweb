@@ -1,0 +1,11 @@
+button {
+  margin-left: 10px;
+}
+
+a:hover {
+  background-color: indianred;
+}
+
+button:hover {
+  background-color: yellowgreen;
+}

@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react"; 
 import {Link} from "react-router-dom";
+import './AddProduct.css';
 
 function AddProduct() {
     const [type, setType] = useState('DVD');

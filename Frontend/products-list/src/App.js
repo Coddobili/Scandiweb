@@ -1,18 +1,17 @@
-import './App.css';
-import Header from './Components/Header';
-import Main from './Components/Main';
-import Footer from './Components/Footer';
+import React from "react";
+import "./App.css";
+import ProductList from "./Components/ProductList";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  return (
-    <>
-      <Header />
-      <hr />
-      <Main />
-      <hr />
-      <Footer />
-    </>
-  );
+    return (
+    <Router>
+          <Routes>
+            <Route path="/" element={<ProductList />} />
+
+          </Routes>
+      </Router>
+    );
 }
 
 export default App;

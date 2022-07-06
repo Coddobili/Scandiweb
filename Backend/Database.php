@@ -38,10 +38,9 @@ final class Database
 
     public function deleteByIds(array $ids): ?bool
     {
-        $string_of_ids = implode(', ', $ids);
-        $statement = $this->pdo->prepare('DELETE FROM products
-                                                WHERE id IN (:ids)');
-        $statement->bindParam(':ids', $string_of_ids);
+        $string_of_ids = implode(',', $ids);
+        $statement = $this->pdo->prepare("DELETE FROM products
+                                                WHERE id IN ($string_of_ids)");
 
         return $statement->execute();
     }

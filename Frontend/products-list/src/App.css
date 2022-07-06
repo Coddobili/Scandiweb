@@ -6,11 +6,6 @@
 }
 
 /* for App Component */
-html, body {
-  height: 100%;
-  width: 100%;
-}
-
 hr {
   height: 4px;
 
@@ -24,8 +19,6 @@ hr {
 
 /* for Header component */
 header {
-  height: 7vh;
-
   display: flex;
   justify-content: space-between;
 }
@@ -58,11 +51,12 @@ button:active {
   box-shadow: 3px 3px 1px black;
   transform: translate3d(1px, 1px, 1px);
 }
+
 #delete-product-btn {
   margin-left: 10px;
 }
 
-#add-product-btn:hover {
+header div button:first-child:hover {
   background-color: yellowgreen;
 }
 
@@ -72,31 +66,41 @@ button:active {
 
 /* for Main component */
 main {
-  height: calc(80vh - 44px);
+  height: 80vh;
+  overflow-Y: scroll;
 
   display: flex;
   flex-wrap: wrap;
- 
 }
 
-#product {
-  height: 180px;
-  width: 300px;
+main > div {
+  height: 200px;
+  width: 250px;
+
   border: 1px solid black;
-  margin: 20px;
+  box-shadow: 5px 5px 1px black;
+
+  margin: 30px;
+}
+
+main > div p {
+  margin-bottom: 5px;
 }
 
 .delete-checkbox {
   margin: 10px;
 }
 
-main div:first-child  input {
-  margin: 10px;
+main div div:first-child {
+  margin: 5px;
 }
 
-footer {
-  height: 10vh;
+main div div:nth-child(2) {
+  text-align: center;
+}
 
+/* for Footer */
+footer {
   display: flex;
   justify-content: center;
 }

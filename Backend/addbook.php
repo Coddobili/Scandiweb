@@ -6,5 +6,7 @@ header('Access-Control-Allow-Headers: Content-Type');
 header('Access-Control-Allow-Methods: POST');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
+    $details = json_decode(file_get_contents("php://input"));
+    $book = new BookProduct($details->sku, $details->name, $details->price, $details->weight);
+    $book->db->addToProducts($book);
 }

@@ -1,66 +1,63 @@
-import axios from "axios";
-import {useState, useEffect} from "react"; 
-import {Link, useNavigate} from "react-router-dom";
+import {useState, useEffect} from 'react'; 
+import {Link, useNavigate} from 'react-router-dom';
+import axios from 'axios';
+import $ from 'jquery';
 
 function AddProduct() {
-    const nav = useNavigate();
-    const [type, setType] = useState('Switcher');
-
-    const [details, setDetails] = useState({
-            sku: '',
-            name: '',
-            price: ''
-    });
-    const [specificDetails, setSpecificDetails] = useState({});
-
-    const handleInputChange = (e) => {
-        setDetails({...details, [e.target.id]: e.target.value})
-    }
-
-    const handleSpecificChange = (e) => {
-        setSpecificDetails({...specificDetails, [e.target.id]: e.target.value})
-    }
+    const navigate = useNavigate();
+    const [type, setType] = useState('switcher');
+    const [flag, setFlag] = useState(false);
 
     const handleTypeChange = (e) => {
         setType(e.target.value);
-        specificDetails({});
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-       if (type !== 'Switcher') {
-            axios.post(`http://localhost:8080/add${type.toLowerCase()}.php`, {...details, ...specificDetails});
-            nav('/');
+        setFlag(false);
+        const details = {};
+
+        const inputs = $('input');
+        setFlag(Array.from(inputs).some(input => input.value === ''));
+        for (const input of inputs) {
+            details[input.id] = input.value;
+        }
+
+        if (type !=='switcher' && !flag) {
+            axios.post(`http://localhost:8080/add${type.toLowerCase()}.php`, details);
+            navigate('/');
+        } else {
+            setFlag(true);
         }
     }
     
     useEffect(() => {
-        document.title = 'Product Add';
+        $(document).attr('title', 'Product Add');
     }, []);
 
     const [switcher] = useState({
-        'Switcher': <></>,
-        'DVD': <>
+        'switcher': <></>,
+        'dvd': <>
             <label>
-                   Size (MB) <input type={'text'} id={'size'} value={setSpecificDetails['size'] && ''} onChange={handleSpecificChange} />
+                   Size (MB) <input type={'number'} id={'size'} />
             </label>
             <p>Please, provide size</p>
             </>,
-        'Furniture': <>
+        'furniture': <>
             <label>
-                Height (CM) <input type={'text'} id={'height'} value={setSpecificDetails['height'] && ''} onChange={handleSpecificChange} />
+                Height (CM) <input type={'number'} id={'height'} />
             </label>
             <label>
-                Width (CM) <input type={'text'} id={'width' } value={setSpecificDetails['width'] && ''} onChange={handleSpecificChange}/>
+                Width (CM) <input type={'number'} id={'width' } />
             </label>
             <label>
-                Length (CM) <input type={'text'} id={'length'} value={setSpecificDetails['length'] && ''} onChange={handleSpecificChange}/>
+                Length (CM) <input type={'number'} id={'length'} />
             </label>
             <p>Please, provide dimensions</p>
             </>,
-        'Book': <>
+        'book': <>
             <label>
-                Weight (KG) <input type={'text'} id={'weight'} value={setSpecificDetails['weight'] && ''} onChange={handleSpecificChange}/>
+                Weight (KG) <input type={'number'} id={'weight'} />
             </label>
             <p>Please, provide weight</p>
             </>
@@ -70,32 +67,43 @@ function AddProduct() {
         <>
         <header>
             <h1>Product Add</h1>
-            <div>
-                <button type="submit" form="product_form" >Save</button>
+            <div className='add'>
+                <button type='submit' form='product_form'>Save</button>
                 <Link to='/' >Cancel</Link>
             </div>
         </header>
         <hr />
         <main>
-            <form id="product_form" onSubmit={handleSubmit}>
-                <label>
-                    SKU <input type={'text'} id={'sku'} value={details['sku']} onChange={handleInputChange}/>
-                </label>
-                <label>
-                    Name <input type={'text'} id={'name'} value={details['name']} onChange={handleInputChange}/>
-                </label>
-                <label>
-                    Price ($) <input type={'text'} id={'price'} value={details['price']} onChange={handleInputChange}/>
-                </label>
-                <label>Type Switcher:
-                <select onChange={handleTypeChange} id={'productType'}>
-                    <option id="Switcher" value={"Switcher"}>Type Switcher</option>
-                    <option id="DVD" value={"DVD"}>DVD</option>
-                    <option id="Furniture" value={"Furniture"}>Furniture</option>
-                    <option id="Book" value={"Book"}>Book</option>
-                </select>
-                {switcher[type]}
-                </label>
+            <form id={'product_form'} onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor={'sku'}>SKU</label>
+                    <input type={'text'} id={'sku'} />
+                </div>
+
+                <div>
+                    <label htmlFor={'name'}>Name</label>
+                    <input type={'text'} id={'name'} />
+                </div>
+
+                <div>
+                    <label htmlFor={'price'}>Price ($)</label>
+                    <input type={'number'} id={'price'} />
+                </div>
+
+                <div>
+                    <label htmlFor={'productType'}>Type Switcher:</label>
+                    <select id={'productType'} onChange={handleTypeChange}>
+                        <option id='Switcher' value={'switcher'}>Type Switcher</option>
+                        <option id='DVD' value={'dvd'}>DVD</option>
+                        <option id='Furniture' value={'furniture'}>Furniture</option>
+                        <option id='Book' value={'book'}>Book</option>
+                    </select>
+                </div>
+
+                <div className='specific'>
+                    {switcher[type]}
+                </div>
+                {flag && <h5>Please, submit required data</h5>}
             </form>
         </main>
         <hr />

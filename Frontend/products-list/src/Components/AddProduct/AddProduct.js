@@ -11,19 +11,25 @@ function AddProduct() {
             name: '',
             price: ''
     });
+    const [specificDetails, setSpecificDetails] = useState({});
 
     const handleInputChange = (e) => {
         setDetails({...details, [e.target.id]: e.target.value})
     }
 
+    const handleSpecificChange = (e) => {
+        setSpecificDetails({...specificDetails, [e.target.id]: e.target.value})
+    }
+
     const handleTypeChange = (e) => {
         setType(e.target.value);
+        specificDetails({});
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
        if (type !== 'Switcher') {
-            axios.post(`http://localhost:8080/add${type.toLowerCase()}.php`, details);
+            axios.post(`http://localhost:8080/add${type.toLowerCase()}.php`, {...details, ...specificDetails});
             nav('/');
         }
     }
@@ -36,25 +42,25 @@ function AddProduct() {
         'Switcher': <></>,
         'DVD': <>
             <label>
-                   Size (MB) <input type={'text'} id={'size'} onChange={handleInputChange} />
+                   Size (MB) <input type={'text'} id={'size'} value={setSpecificDetails['size'] && ''} onChange={handleSpecificChange} />
             </label>
             <p>Please, provide size</p>
             </>,
         'Furniture': <>
             <label>
-                Height (CM) <input type={'text'} id={'height'} onChange={handleInputChange} />
+                Height (CM) <input type={'text'} id={'height'} value={setSpecificDetails['height'] && ''} onChange={handleSpecificChange} />
             </label>
             <label>
-                Width (CM) <input type={'text'} id={'width' } onChange={handleInputChange}/>
+                Width (CM) <input type={'text'} id={'width' } value={setSpecificDetails['width'] && ''} onChange={handleSpecificChange}/>
             </label>
             <label>
-                Length (CM) <input type={'text'} id={'length'} onChange={handleInputChange}/>
+                Length (CM) <input type={'text'} id={'length'} value={setSpecificDetails['length'] && ''} onChange={handleSpecificChange}/>
             </label>
             <p>Please, provide dimensions</p>
             </>,
         'Book': <>
             <label>
-                Weight (KG) <input type={'text'} id={'weight'} onChange={handleInputChange}/>
+                Weight (KG) <input type={'text'} id={'weight'} value={setSpecificDetails['weight'] && ''} onChange={handleSpecificChange}/>
             </label>
             <p>Please, provide weight</p>
             </>

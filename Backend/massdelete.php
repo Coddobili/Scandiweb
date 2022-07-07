@@ -9,4 +9,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $db = new Database();
     $db->deleteByIds(json_decode(file_get_contents("php://input"), true));
 }
-

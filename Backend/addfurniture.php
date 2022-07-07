@@ -8,5 +8,5 @@ header('Access-Control-Allow-Methods: POST');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $details = json_decode(file_get_contents("php://input"));
     $furniture = new FurnitureProduct($details->sku, $details->name, $details->price, $details->height, $details->width, $details->length);
-    $furniture->getDb()->addToProducts($furniture);
+    echo $furniture->getDb()->addToProducts($furniture);
 }

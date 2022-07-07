@@ -1,4 +1,7 @@
 <?php
+
+use JetBrains\PhpStorm\Internal\LanguageLevelTypeAware;
+
 require_once 'Product.php';
 
 final class Database
@@ -25,6 +28,12 @@ final class Database
         $statement = $this->pdo->prepare('INSERT INTO products (sku, name, price, about) 
                                                 VALUES (:sku, :name, :price, :about)');
         $sku = $product->getSku();
+        $statement1 = $this->pdo->prepare('SELECT * FROM products WHERE sku = :sku');
+        $statement1->bindValue(':sku', $sku);
+        $statement1->execute();
+        if ($statement1->rowCount() > 0) {
+            return false;
+        }
         $name = $product->getName();
         $price = $product->getPrice();
         $about = $product->getAbout();

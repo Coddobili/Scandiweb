@@ -7,6 +7,7 @@ function AddProduct() {
     const navigate = useNavigate();
     const [type, setType] = useState('switcher');
     const [flag, setFlag] = useState(false);
+    const [flag1, setFlag1] = useState(false); 
 
     const handleTypeChange = (e) => {
         setType(e.target.value);
@@ -14,6 +15,7 @@ function AddProduct() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setFlag1(false);
         let flag1 = false;
         setFlag(type === 'switcher');
 
@@ -45,8 +47,14 @@ function AddProduct() {
             for (const input of allInputs) {
                 details[input.id] = input.value;
             }
-            axios.post(`http://localhost:8080/add${type}.php`, details);
-            navigate('/');
+            axios.post(`http://localhost:8080/add${type}.php`, details)
+                .then(function (response) {
+                    if (response.data) {
+                        navigate('/');
+                    } else {
+                        setFlag1(true);
+                    }
+                });
         }
     }
 
@@ -129,6 +137,7 @@ function AddProduct() {
                     {switcher[type]}
                 </div>
                 {flag && <h5>Please, submit required data</h5>}
+                {flag1 && <h3 style={{color: 'red'}}>Choose different sku</h3>}
             </form>
         </main>
         <hr />

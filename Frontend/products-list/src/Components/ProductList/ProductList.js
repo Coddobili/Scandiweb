@@ -49,7 +49,6 @@ function ProductList() {
                   <input type={'checkbox'} className={'delete-checkbox'} id={product.id}/>
                 </div>
                 <div>
-                  <p>{product.id}</p>
                   <p>{product.sku}</p>
                   <p>{product.name}</p>
                   <p>{product.price}</p>

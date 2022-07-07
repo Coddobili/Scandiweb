@@ -6,7 +6,11 @@ function AddProduct() {
     const nav = useNavigate();
     const [type, setType] = useState('Switcher');
 
-    const [details, setDetails] = useState({});
+    const [details, setDetails] = useState({
+            sku: '',
+            name: '',
+            price: ''
+    });
 
     const handleInputChange = (e) => {
         setDetails({...details, [e.target.id]: e.target.value})
@@ -18,7 +22,7 @@ function AddProduct() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (type !== 'Switcher') {
+       if (type !== 'Switcher') {
             axios.post(`http://localhost:8080/add${type.toLowerCase()}.php`, details);
             nav('/');
         }
@@ -26,16 +30,6 @@ function AddProduct() {
     
     useEffect(() => {
         document.title = 'Product Add';
-        setDetails({
-            sku: '',
-            name: '',
-            price: '',
-            size: '',
-            weight: '',
-            height: '',
-            width: '',
-            length: ''
-        });
     }, []);
 
     const [switcher] = useState({
@@ -79,15 +73,15 @@ function AddProduct() {
         <main>
             <form id="product_form" onSubmit={handleSubmit}>
                 <label>
-                    SKU <input type={'text'} id={'sku'} onChange={handleInputChange}/>
+                    SKU <input type={'text'} id={'sku'} value={details['sku']} onChange={handleInputChange}/>
                 </label>
                 <label>
-                    Name <input type={'text'} id={'name'} onChange={handleInputChange}/>
+                    Name <input type={'text'} id={'name'} value={details['name']} onChange={handleInputChange}/>
                 </label>
                 <label>
-                    Price ($) <input type={'text'} id={'price'} onChange={handleInputChange}/>
+                    Price ($) <input type={'text'} id={'price'} value={details['price']} onChange={handleInputChange}/>
                 </label>
-                <label for="types">Type Switcher:</label>
+                <label>Type Switcher:
                 <select onChange={handleTypeChange} id={'productType'}>
                     <option id="Switcher" value={"Switcher"}>Type Switcher</option>
                     <option id="DVD" value={"DVD"}>DVD</option>
@@ -95,6 +89,7 @@ function AddProduct() {
                     <option id="Book" value={"Book"}>Book</option>
                 </select>
                 {switcher[type]}
+                </label>
             </form>
         </main>
         <hr />

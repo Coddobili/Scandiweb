@@ -10,25 +10,21 @@ function ProductList() {
         $(document).attr('title', 'Product List');
 
         axios.get('http://localhost:8080/get.php')
-        .then(response => {
-            setProducts(response.data);
-        }).catch(error => {
-            console.log(error);
+        .then(res => {
+            setProducts(res.data);
         });
     }, []);
 
     const handleMassDelete = () => {
-        let checkboxes = $('.delete-checkbox');
-        checkboxes = Array.from(checkboxes).filter(checkbox => checkbox.checked)
-        checkboxes.forEach((e, index, array) => {
+        let checks = $('.delete-checkbox');
+        checks = Array.from(checks).filter(check => check.checked)
+        checks.forEach((e, index, array) => {
             array[index] = e.id;
         });
 
-        axios.post('http://localhost:8080/massdelete.php', checkboxes)
+        axios.post('http://localhost:8080/massdelete.php', checks)
             .then(() => {
                 window.location.reload(false);
-            }).catch(error => {
-                console.log(error);
             });
     }
 

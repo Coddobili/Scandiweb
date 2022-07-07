@@ -117,10 +117,6 @@ main form {
   margin-left: 40px;
 }
 
-main form h4 {
-  color: red;
-}
-
 main form div {
   width: 210px;
 }
@@ -145,14 +141,16 @@ main form div select {
   font-size: 15px;
 }
 
-h6, h5 {
+h6, h5, h4 {
   color: red;
 }
-
-
 
 /* for footer */
 footer {
   display: flex;
   justify-content: center;
+}
+
+footer h4 {
+  color: black;
 }

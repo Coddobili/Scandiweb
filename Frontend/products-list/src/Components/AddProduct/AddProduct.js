@@ -14,23 +14,42 @@ function AddProduct() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setFlag(false);
-        const details = {};
+        let flag1 = false;
+        setFlag(type === 'switcher');
 
-        const inputs = $('input');
-        setFlag(Array.from(inputs).some(input => input.value === ''));
-        for (const input of inputs) {
-            details[input.id] = input.value;
+        
+        const allInputs = Array.from($('input'));
+        const numberInputs = allInputs.slice(2);
+
+        for (const input of allInputs) {
+            if (input.value === '') {
+                setFlag(true);
+                flag1 = true;
+                break;
+            }
         }
 
-        if (type !=='switcher' && !flag) {
-            axios.post(`http://localhost:8080/add${type.toLowerCase()}.php`, details);
+        for (const input of numberInputs) {
+            const number = Number(input.value);
+            if (isNaN(number) || number <= 0) {
+                $(`#${input.id}`).next().show();
+                setFlag(true);
+                flag1 = true;
+            } else {
+                $(`#${input.id}`).next().hide();
+            }
+        }
+
+        if (!flag1) {
+            const details = {};
+            for (const input of allInputs) {
+                details[input.id] = input.value;
+            }
+            axios.post(`http://localhost:8080/add${type}.php`, details);
             navigate('/');
-        } else {
-            setFlag(true);
         }
     }
-    
+
     useEffect(() => {
         $(document).attr('title', 'Product Add');
     }, []);
@@ -39,25 +58,30 @@ function AddProduct() {
         'switcher': <></>,
         'dvd': <>
             <label>
-                   Size (MB) <input type={'number'} id={'size'} />
+                   Size (MB) <input type={'text'} id={'size'} />
+                   <h6  style={{display: 'none'}}>Please, provide the data of indicated type</h6>
             </label>
             <p>Please, provide size</p>
             </>,
         'furniture': <>
             <label>
-                Height (CM) <input type={'number'} id={'height'} />
+                Height (CM) <input type={'text'} id={'height'} />
+                <h6 style={{display: 'none'}}>Please, provide the data of indicated type</h6>
             </label>
             <label>
-                Width (CM) <input type={'number'} id={'width' } />
+                Width (CM) <input type={'text'} id={'width' } />
+                <h6 style={{display: 'none'}}>Please, provide the data of indicated type</h6>
             </label>
             <label>
-                Length (CM) <input type={'number'} id={'length'} />
+                Length (CM) <input type={'text'} id={'length'} />
+                <h6 style={{display: 'none'}}>Please, provide the data of indicated type</h6>
             </label>
             <p>Please, provide dimensions</p>
             </>,
         'book': <>
             <label>
-                Weight (KG) <input type={'number'} id={'weight'} />
+                Weight (KG) <input type={'text'} id={'weight'} />
+                <h6 style={{display: 'none'}}>Please, provide the data of indicated type</h6>
             </label>
             <p>Please, provide weight</p>
             </>
@@ -87,7 +111,8 @@ function AddProduct() {
 
                 <div>
                     <label htmlFor={'price'}>Price ($)</label>
-                    <input type={'number'} id={'price'} />
+                    <input type={'text'} id={'price'} />
+                    <h6 style={{display: 'none'}}>Please, provide the data of indicated type</h6>
                 </div>
 
                 <div>

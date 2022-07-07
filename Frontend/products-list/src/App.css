@@ -145,9 +145,11 @@ main form div select {
   font-size: 15px;
 }
 
-h5 {
+h6, h5 {
   color: red;
 }
+
+
 
 /* for footer */
 footer {

@@ -141,8 +141,16 @@ main form div select {
   font-size: 15px;
 }
 
-h6, h5, h4 {
+.error, .error1 {
   color: red;
+}
+
+.error {
+  font-size: 15px;
+}
+
+.checked {
+  background-color: indianred;
 }
 
 /* for footer */
@@ -151,6 +159,6 @@ footer {
   justify-content: center;
 }
 
-footer h4 {
+footer p {
   color: black;
 }

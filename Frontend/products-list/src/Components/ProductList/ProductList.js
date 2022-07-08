@@ -28,6 +28,10 @@ function ProductList() {
             });
     }
 
+    const handleCheck = (e) => {
+        $(`.${e.target.id}`).toggleClass('checked');
+    }
+
     return (
     <>
         <header>
@@ -40,9 +44,9 @@ function ProductList() {
         <hr />
         <main>
             {products.map(product => { return (
-            <div key={product.id}>
+            <div key={product.id} className={product.id}>
                 <div>
-                    <input type={'checkbox'} className={'delete-checkbox'} id={product.id} />
+                    <input type={'checkbox'} className={'delete-checkbox'} id={product.id} onClick={handleCheck}/>
                 </div>
                 <div>
                     <p>{product.sku}</p>
@@ -55,7 +59,7 @@ function ProductList() {
         </main>
         <hr />
         <footer>
-            <h4>Scandiweb Test assignment</h4>
+            <p>Scandiweb Test assignment</p>
         </footer>
     </>
     )

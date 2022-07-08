@@ -11,6 +11,8 @@ function AddProduct() {
 
     const handleTypeChange = (e) => {
         setType(e.target.value);
+        $('p').hide();
+        $('input').val('');
     }
 
     const handleSubmit = (e) => {
@@ -65,29 +67,29 @@ function AddProduct() {
         'dvd': <>
             <label>
                    Size (MB) <input type={'text'} id={'size'} />
-                   <h6  style={{display: 'none'}}>Please, provide the data of indicated type</h6>
+                   <p  style={{display: 'none'}} className={'error'}>Please, provide the data of indicated type</p>
             </label>
             <p>Please, provide size</p>
             </>,
         'furniture': <>
             <label>
                 Height (CM) <input type={'text'} id={'height'} />
-                <h6 style={{display: 'none'}}>Please, provide the data of indicated type</h6>
+                <p style={{display: 'none'}} className={'error'}>Please, provide the data of indicated type</p>
             </label>
             <label>
                 Width (CM) <input type={'text'} id={'width' } />
-                <h6 style={{display: 'none'}}>Please, provide the data of indicated type</h6>
+                <p style={{display: 'none'}} className={'error'}>Please, provide the data of indicated type</p>
             </label>
             <label>
                 Length (CM) <input type={'text'} id={'length'} />
-                <h6 style={{display: 'none'}}>Please, provide the data of indicated type</h6>
+                <p style={{display: 'none'}} className={'error'}>Please, provide the data of indicated type</p>
             </label>
             <p>Please, provide dimensions</p>
             </>,
         'book': <>
             <label>
                 Weight (KG) <input type={'text'} id={'weight'} />
-                <h6 style={{display: 'none'}}>Please, provide the data of indicated type</h6>
+                <p style={{display: 'none'}} className={'error'}>Please, provide the data of indicated type</p>
             </label>
             <p>Please, provide weight</p>
             </>
@@ -118,7 +120,7 @@ function AddProduct() {
                 <div>
                     <label htmlFor={'price'}>Price ($)</label>
                     <input type={'text'} id={'price'} />
-                    <h6 style={{display: 'none'}}>Please, provide the data of indicated type</h6>
+                    <p style={{display: 'none'}} className={'error'}>Please, provide the data of indicated type</p>
                 </div>
 
                 <div>
@@ -134,13 +136,13 @@ function AddProduct() {
                 <div className='specific'>
                     {switcher[type]}
                 </div>
-                {flag && <h5>Please, submit required data</h5>}
-                {flag2 && <h4 style={{color: 'red'}}>Choose different sku</h4>}
+                {flag && <p className={'error1'}>Please, submit required data</p>}
+                {flag2 && <p className={'error1'}>Choose different sku</p>}
             </form>
         </main>
         <hr />
         <footer>
-            <h4>Scandiweb Test assignment</h4>
+            <p>Scandiweb Test assignment</p>
         </footer>
         </>
     );

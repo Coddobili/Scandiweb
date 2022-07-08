@@ -9,7 +9,7 @@ function ProductList() {
     useEffect(() => {
         $(document).attr('title', 'Product List');
 
-        axios.get('http://localhost:8080/get.php')
+        axios.get('http://localhost:8080/Requests/Get/get.php')
         .then(res => {
             setProducts(res.data);
         });
@@ -22,7 +22,7 @@ function ProductList() {
             array[index] = e.id;
         });
 
-        axios.post('http://localhost:8080/massdelete.php', checks)
+        axios.post('http://localhost:8080/Requests/Delete/massdelete.php', checks)
             .then(() => {
                 window.location.reload(false);
             });

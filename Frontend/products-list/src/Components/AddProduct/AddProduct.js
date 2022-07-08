@@ -49,7 +49,7 @@ function AddProduct() {
                 details[input.id] = input.value;
             }
 
-            axios.post(`http://localhost:8080/add${type}.php`, details)
+            axios.post(`http://localhost:8080/Requests/Add/add${type}.php`, details)
                 .then(res => {
                     res.data ? nav('/') : setFlag2(true);
                 });

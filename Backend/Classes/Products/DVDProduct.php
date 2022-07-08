@@ -1,5 +1,5 @@
 <?php
-require_once 'Product.php';
+require_once '../Products/Product.php';
 
 final class DVDProduct extends Product
 {

@@ -1,5 +1,6 @@
 <?php
-require_once '../Products/Product.php';
+namespace Classes;
+use PDO;
 
 final class Database
 {

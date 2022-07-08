@@ -1,5 +1,5 @@
 <?php
-require_once '../Database/Database.php';
+namespace Classes;
 
 abstract class Product
 {

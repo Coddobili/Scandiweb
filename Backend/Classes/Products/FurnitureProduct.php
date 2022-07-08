@@ -1,5 +1,5 @@
 <?php
-require_once '../Products/Product.php';
+namespace Classes;
 
 final class FurnitureProduct extends Product
 {

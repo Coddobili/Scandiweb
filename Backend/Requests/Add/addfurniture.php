@@ -1,5 +1,5 @@
 <?php
-use Classes\FurnitureProduct;
+require_once dirname(dirname(dirname(__FILE__))).'/Classes/Products/FurnitureProduct.php';
 
 header('Access-Control-Allow-Origin: http://localhost:3000');
 header('Access-Control-Allow-Headers: Content-Type');

@@ -1,10 +1,9 @@
 <?php
-namespace Classes;
-use PDO;
+require_once dirname(dirname(__FILE__)).'/Products/Product.php';
 
 final class Database
 {
-    public ?PDO $pdo = null;
+    public PDO $pdo;
 
     public function __construct()
     {
@@ -12,14 +11,14 @@ final class Database
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    public function getProducts(): ?array
+    public function getProducts(): array
     {
         $statement = $this->pdo->prepare('SELECT * FROM products');
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function addToProducts(Product $product): ?bool
+    public function addToProducts(Product $product): bool
     {
         $statement = $this->pdo->prepare('INSERT INTO products (sku, name, price, about) 
                                                 VALUES (:sku, :name, :price, :about)');
@@ -43,7 +42,7 @@ final class Database
         return $statement->execute();
     }
 
-    public function deleteByIds(array $ids): ?bool
+    public function deleteByIds(array $ids): bool
     {
         $string_of_ids = implode(',', $ids); 
         $statement = $this->pdo->prepare("DELETE FROM products WHERE id IN ($string_of_ids)");

@@ -1,14 +1,14 @@
 <?php
-namespace Classes;
+require_once dirname(dirname(__FILE__)).'/Database/Database.php';
 
 abstract class Product
 {
-    private ?string $sku;
-    private ?string $name;
-    private ?string $price;
-    private ?Database $db;
+    private string $sku;
+    private string $name;
+    private string $price;
+    private Database $db;
 
-    public function __construct(?string $sku, ?string $name, ?string $price)
+    public function __construct(string $sku, string $name, string $price)
     {
         $this->sku = $sku;
         $this->name = $name;
@@ -16,25 +16,25 @@ abstract class Product
         $this->db = new Database();
     }
 
-    public function getSku(): ?string
+    public function getSku(): string
     {
         return $this->sku;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function getPrice(): ?string
+    public function getPrice(): string
     {
         return $this->price;
     }
 
-    public function getDb(): ?Database
+    public function getDb(): Database
     {
         return $this->db;
     }
 
-    abstract function getAbout(): ?string;
+    abstract function getAbout(): string;
 }

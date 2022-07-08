@@ -1,5 +1,5 @@
 <?php
-use Classes\DVDProduct;
+require_once dirname(dirname(dirname(__FILE__))).'/Classes/Products/DVDProduct.php';
 
 header('Access-Control-Allow-Origin: http://localhost:3000');
 header('Access-Control-Allow-Headers: Content-Type');

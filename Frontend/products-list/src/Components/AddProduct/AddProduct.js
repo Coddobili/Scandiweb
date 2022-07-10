@@ -142,7 +142,7 @@ function AddProduct() {
         </main>
         <hr />
         <footer>
-            <p>Scandiweb Test assignment</p>
+            <h4>Scandiweb Test assignment</h4>
         </footer>
         </>
     );

@@ -12,7 +12,6 @@ function AddProduct() {
     const handleTypeChange = (e) => {
         setType(e.target.value);
         $('p').hide();
-        $('input').val('');
     }
 
     const handleSubmit = (e) => {
@@ -51,7 +50,7 @@ function AddProduct() {
                 details[input.id] = input.value;
             }
 
-            axios.post(`http://localhost:8080/Requests/Add/add${type}.php`, details)
+            axios.post(`https://scandiweb5604backend.herokuapp.com/Requests/Add/add${type}.php`, details)
                 .then(res => {
                     res.data ? nav('/') : setFlag2(true);
                 });

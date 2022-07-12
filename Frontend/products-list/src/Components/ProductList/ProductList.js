@@ -9,7 +9,7 @@ function ProductList() {
     useEffect(() => {
         $(document).attr('title', 'Product List');
 
-        axios.get('http://localhost:8080/Requests/Get/get.php')
+        axios.get('https://scandiweb5604backend.herokuapp.com/Requests/Get/get.php')
         .then(res => {
             setProducts(res.data);
         });
@@ -22,7 +22,7 @@ function ProductList() {
             array[index] = e.id;
         });
 
-        axios.post('http://localhost:8080/Requests/Delete/massdelete.php', checks)
+        axios.post('https://scandiweb5604backend.herokuapp.com/Requests/Delete/massdelete.php', checks)
             .then(() => {
                 window.location.reload(false);
             });

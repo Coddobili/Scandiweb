@@ -7,7 +7,7 @@ final class Database
 
     public function __construct()
     {
-        $this->pdo = new PDO('mysql:host=localhost;port=3306;dbname=scandiweb', 'root', '');
+        $this->pdo = new PDO('mysql:host=sql11.freesqldatabase.com;port=3306;dbname=sql11505939', 'sql11505939', '1WLdeRs2vv');
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
